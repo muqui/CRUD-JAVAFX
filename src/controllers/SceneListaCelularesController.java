@@ -6,7 +6,7 @@
 package controllers;
 
 import Beans.Celular;
-import Persistencia.DaoCelular;
+import DataAdapters.tblCelular;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,8 +28,8 @@ import javafx.util.Callback;
  * @author mq12
  */
 public class SceneListaCelularesController implements Initializable {
-
-    DaoCelular d = new DaoCelular();
+    tblCelular daoCelular = new tblCelular();
+    tblCelular d = new tblCelular();
     ObservableList<Celular> data;
     @FXML
     private TableView<Celular> tableViewCelulares;
@@ -38,6 +38,11 @@ public class SceneListaCelularesController implements Initializable {
         data.forEach((tab) -> {
             if (event.getSource() == tab.getBotonDetalles()) {
                 System.out.println("ID = " + tab.getID());
+            }
+             if (event.getSource() == tab.getBotonBorrar()) {
+                System.out.println("borrar ID = " + tab.getID());
+                daoCelular.borrarCelular(tab.getID());
+                llenarTabla();
             }
 
         });
@@ -60,6 +65,7 @@ public class SceneListaCelularesController implements Initializable {
         data = d.getInitialTableData();
         data.forEach((tab) -> {
             tab.getBotonDetalles().setOnAction(this::eventoTabla);
+            tab.getBotonBorrar().setOnAction(this::eventoTabla);
         });
          System.out.println("Llenar tabla");
         TableColumn tableColumnID = new TableColumn("ID");

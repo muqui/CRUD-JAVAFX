@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistencia;
+package DataAdapters;
 
 import Beans.Celular;
+import Persistencia.ConnectionMYSQLManager;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,12 +20,13 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author mq12
  */
-public class DaoCelular {
+public class tblCelular {
 
     private Connection con = null;
     private Statement stmt = null;
@@ -43,7 +45,7 @@ public class DaoCelular {
             }
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DaoCelular.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tblCelular.class.getName()).log(Level.SEVERE, null, ex);
         }
         ObservableList<Celular> data = FXCollections.observableList(list);
 
@@ -51,10 +53,13 @@ public class DaoCelular {
     }
 
     public void altaCelular(Celular celular) {
+        
         try {
+           
             con = ConnectionMYSQLManager.getConnection();
             String query = " insert into celulares (cel_nombre, cel_marca, cel_descripcion, cel_color, cel_imagen, cel_cantidad, cel_precio)"
                     + " values (?, ?, ?, ?, ?, ?, ?)";
+          
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, celular.getNombre());
@@ -65,11 +70,32 @@ public class DaoCelular {
             preparedStmt.setInt(6,celular.getCantidad());
             preparedStmt.setBigDecimal(7, celular.getPrecio());
 
-            // execute the preparedstatement
-            preparedStmt.execute();
+           preparedStmt.execute();
+           
              con.close();
+              JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
         } catch (SQLException ex) {
-            Logger.getLogger(DaoCelular.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(tblCelular.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Could not open file", "Error", JOptionPane.ERROR_MESSAGE);
         }
+       
+    }
+
+    /**
+     * Elimina registro de la tabla celulares por id
+     * @param id
+     */
+    public void borrarCelular(int id){
+         con = ConnectionMYSQLManager.getConnection();
+          String query = "delete from celulares where cel_id = ?";
+        try {
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt(1,id);
+            preparedStmt.executeUpdate();
+              JOptionPane.showMessageDialog(null, "Registro borrado.");
+        } catch (SQLException ex) {
+            Logger.getLogger(tblCelular.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
