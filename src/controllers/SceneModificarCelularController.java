@@ -16,18 +16,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javax.swing.JOptionPane;
 
 /**
+ * FXML Controller class
  *
- * @author mq12
+ * @author patyy
  */
-public class SceneAltaCelularController implements Initializable {
-  
-      Celular celular = new Celular();
+public class SceneModificarCelularController implements Initializable {
+    Celular celular = new Celular();
     tblCelular daoCelular = new tblCelular();
-
-    @FXML
+    private int id = 0;
+    /**
+     * Initializes the controller class.
+     */
+    
+     @FXML
+    private SceneListaCelularesController  sceneListaCelularesController; 
+     
+        @FXML
     private TextField textFieldNombre;
 
     @FXML
@@ -49,7 +55,7 @@ public class SceneAltaCelularController implements Initializable {
     private TextField textFieldPrecio;
 
     @FXML
-    private Button buttonAlta;
+    private Button buttonModificar;
 
     @FXML
     private Label labelErrorNombre;
@@ -73,40 +79,18 @@ public class SceneAltaCelularController implements Initializable {
     private Label labelErrorPrecio;
 
     @FXML
-    private void altaCelular(ActionEvent event) {
-        limpiarMensajesDeerror();
+    void modificarCelular(ActionEvent event) {
+                limpiarMensajesDeerror();
         if (validarCampos()) {
-            daoCelular.altaCelular(celular);
+            celular.setID(id);
+            daoCelular.ModificarCelular(celular);
             limpiarCampos();
+    //         sceneListaCelularesController.llenarTabla();
+    
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        limpiarMensajesDeerror();
-    }
-
-    /**
-     * Limpia los mensajes de error;
-     */
-    public void limpiarMensajesDeerror() {
-        labelErrorNombre.setText("");
-
-        labelErrorMarca.setText("");
-
-        labelErrorDescripcion.setText("");
-
-        labelErrorColor.setText("");
-
-        labelErrorImagen.setText("");
-
-        labelErrorCantidad.setText("");
-
-        labelErrorPrecio.setText("");
 
     }
-
-    /**
+     /**
      * Limpia los campos del formulario de alta
      */
     public void limpiarCampos() {
@@ -117,13 +101,13 @@ public class SceneAltaCelularController implements Initializable {
         textFieldImagen.setText("");
         textFieldCantidad.setText("");
         textFieldPrecio.setText("");
+//         sceneListaCelularesController.llenarTabla();
     }
 
     /**
      * valida los campos del formulario
      */
     public boolean validarCampos() {
-        
         boolean resultado = true;
         //valida campo Nombre
         if (textFieldNombre.getText().trim().equals("")) {
@@ -172,11 +156,46 @@ public class SceneAltaCelularController implements Initializable {
             labelErrorPrecio.setText("Precio  es requerido.");
             resultado = false;
         } else {
-            //celular.setPrecio(new BigDecimal(textFieldPrecio.getText().toString()));
-            celular.setPrecio(Double.parseDouble(textFieldPrecio.getText()));
+           // celular.setPrecio(new BigDecimal(textFieldPrecio.getText().toString()));
+             celular.setPrecio(Double.parseDouble(textFieldPrecio.getText()));
         }
 
         return resultado;
     }
+    
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    
+      //recibe el indice de la escena scenePrincipal
+    public void idCelular(int id) {
+       this.id = id;
+       
+    }
+    
+     /**
+     * Limpia los mensajes de error;
+     */
+    public void limpiarMensajesDeerror() {
+        labelErrorNombre.setText("");
 
+        labelErrorMarca.setText("");
+
+        labelErrorDescripcion.setText("");
+
+        labelErrorColor.setText("");
+
+        labelErrorImagen.setText("");
+
+        labelErrorCantidad.setText("");
+
+        labelErrorPrecio.setText("");
+
+    }
+
+   
+    
 }

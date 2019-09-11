@@ -6,7 +6,12 @@
 package Beans;
 
 import java.beans.PropertyChangeSupport;
-import java.math.BigDecimal;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 
 /**
@@ -15,82 +20,133 @@ import javafx.scene.control.Button;
  */
 public class Celular {
 
-    @Override
-    public String toString() {
-        return "Celular{" + "ID=" + ID + ", nombre=" + nombre + ", marca=" + marca + ", descripcion=" + descripcion + ", color=" + color + ", imagen=" + imagen + ", cantidad=" + cantidad + ", precio=" + precio + '}';
-    }
+  
+
+    private IntegerProperty ID= new SimpleIntegerProperty();
+    private   StringProperty  nombre =  new SimpleStringProperty();
+    private StringProperty  marca=  new SimpleStringProperty();
+    private StringProperty  descripcion=  new SimpleStringProperty();
+    private StringProperty  color=  new SimpleStringProperty();
+    private StringProperty  imagen=  new SimpleStringProperty();
+    private IntegerProperty  cantidad=  new SimpleIntegerProperty();
+    private DoubleProperty  precio=  new SimpleDoubleProperty();
 
     public Celular() {
-         propertySupport = new PropertyChangeSupport(this);
+      
     }
 
-    /**
-     * @return the botonActualizar
-     */
+    public int getID() {
+        return ID.get();
+    }
+
+    public void setID(int ID) {
+        this.ID.set(ID);
+    }
+
+    public String getNombre() {
+        return nombre.get();
+    }
+
+    public void setNombre(String nombre) {
+       
+        this.nombre.set(nombre);
+        System.out.println("NOmnre xxx" + this.nombre);
+    }
+
+    public String getMarca() {
+        return marca.get();
+    }
+
+    public void setMarca(String marca) {
+        this.marca.set(marca);
+    }
+
+    public String getDescripcion() {
+        return descripcion.get();
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion.set(descripcion);
+    }
+
+    public String getColor() {
+        return color.get();
+    }
+
+    public void setColor(String color) {
+        this.color.set(color);
+    }
+
+    public String getImagen() {
+        return imagen.get();
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen.set(imagen);
+    }
+
+    public int getCantidad() {
+        return cantidad.get();
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad.set(cantidad);
+    }
+
+    public Double getPrecio() {
+        return precio.get();
+    }
+
+    public void setPrecio(double precio) {
+        this.precio.set(precio);
+    }
+
+    public Button getBotonDetalles() {
+        return botonDetalles;
+    }
+
+    public void setBotonDetalles(Button botonDetalles) {
+        this.botonDetalles = botonDetalles;
+    }
+
     public Button getBotonActualizar() {
         return botonActualizar;
     }
 
-    /**
-     * @param botonActualizar the botonActualizar to set
-     */
     public void setBotonActualizar(Button botonActualizar) {
         this.botonActualizar = botonActualizar;
     }
 
-    /**
-     * @return the botonBorrar
-     */
     public Button getBotonBorrar() {
         return botonBorrar;
     }
 
-    /**
-     * @param botonBorrar the botonBorrar to set
-     */
     public void setBotonBorrar(Button botonBorrar) {
         this.botonBorrar = botonBorrar;
     }
 
-    private int ID;
-    private String nombre;
-    private String marca;
-    private String descripcion;
-    private String color;
-    private String imagen;
-    private int cantidad;
-    private BigDecimal precio;
+    public PropertyChangeSupport getPropertySupport() {
+        return propertySupport;
+    }
+
+    public void setPropertySupport(PropertyChangeSupport propertySupport) {
+        this.propertySupport = propertySupport;
+    }
     private Button botonDetalles;
     private Button botonActualizar;
     private Button botonBorrar;
     private PropertyChangeSupport propertySupport;
     
-  
-
-
-    public Celular(String nombre, String marca, String descripcion, String color, String imagen, int cantidad, BigDecimal precio) {
-        this.nombre = nombre;
-        this.marca = marca;
-        this.descripcion = descripcion;
-        this.color = color;
-        this.imagen = imagen;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.botonDetalles = new Button("Detalles");
-        this.botonActualizar = new Button("Actualizar");
-        this.botonBorrar = new Button("Borrar");
-
-    }
-
-    public Celular(int id, String nombre, String marca, String descripcion, String color, String imagen, int cantidad, BigDecimal precio, Button botonDetalles, Button botonActualizar , Button botonBorrar) {
-        this.ID = id;
-        this.nombre = nombre;
-        this.marca = marca;
-        this.descripcion = descripcion;
-        this.color = color;
-        this.imagen = imagen;
-        this.cantidad = cantidad;
-        this.precio = precio;
+    public Celular(int id, String nombre, String marca, String descripcion, String color, String imagen, int cantidad, double precio, Button botonDetalles, Button botonActualizar , Button botonBorrar) {
+        // this.nombre = new SimpleStringProperty(nombre);
+        this.ID = new SimpleIntegerProperty(id);
+        this.nombre = new SimpleStringProperty(nombre);
+        this.marca =new SimpleStringProperty(marca);
+        this.descripcion = new SimpleStringProperty(descripcion);
+        this.color = new SimpleStringProperty(color);
+        this.imagen = new SimpleStringProperty(imagen);
+        this.cantidad =  new SimpleIntegerProperty(cantidad);
+        this.precio = new SimpleDoubleProperty(precio);
         this.botonDetalles = botonDetalles;
         this.botonActualizar = botonActualizar;
         this.botonBorrar = botonBorrar;
@@ -99,82 +155,6 @@ public class Celular {
         this.botonBorrar = new Button("Borrar");
     }
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    /**
-     * @return the botonDetalles
-     */
-    public Button getBotonDetalles() {
-        return botonDetalles;
-    }
-
-    /**
-     * @param botonDetalles the botonDetalles to set
-     */
-    public void setBotonDetalles(Button botonDetalles) {
-        this.botonDetalles = botonDetalles;
-    }
 
 }

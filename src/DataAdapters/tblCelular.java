@@ -41,7 +41,7 @@ public class tblCelular {
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
 
-                list.add(new Celular(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBigDecimal(8), new Button(), new Button(), new Button()));
+                list.add(new Celular(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getDouble(8), new Button(), new Button(), new Button()));
             }
             con.close();
         } catch (SQLException ex) {
@@ -59,7 +59,7 @@ public class tblCelular {
             con = ConnectionMYSQLManager.getConnection();
             String query = " insert into celulares (cel_nombre, cel_marca, cel_descripcion, cel_color, cel_imagen, cel_cantidad, cel_precio)"
                     + " values (?, ?, ?, ?, ?, ?, ?)";
-          
+            System.out.println("nombre " +  celular.getNombre());
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, celular.getNombre());
@@ -68,7 +68,7 @@ public class tblCelular {
             preparedStmt.setString(4, celular.getColor());
             preparedStmt.setString(5, celular.getImagen());
             preparedStmt.setInt(6,celular.getCantidad());
-            preparedStmt.setBigDecimal(7, celular.getPrecio());
+            preparedStmt.setDouble(7, celular.getPrecio());
 
            preparedStmt.execute();
            
@@ -97,5 +97,27 @@ public class tblCelular {
             Logger.getLogger(tblCelular.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+        public void ModificarCelular(Celular celular) {
+         con = ConnectionMYSQLManager.getConnection();
+        try {
+            String query ="UPDATE celulares set cel_nombre = ?, cel_marca = ?, cel_descripcion = ?, cel_color = ?, cel_imagen = ?, cel_cantidad = ?, cel_precio = ? WHERE cel_ID = ?   ";
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, celular.getNombre());
+            preparedStmt.setString(2, celular.getMarca());
+            preparedStmt.setString(3, celular.getDescripcion());
+            preparedStmt.setString(4, celular.getColor());
+            preparedStmt.setString(5, celular.getImagen());
+            preparedStmt.setInt(6,celular.getCantidad());
+            preparedStmt.setDouble(7, celular.getPrecio());
+             preparedStmt.setInt(8, celular.getID());
+            
+            preparedStmt.execute(); 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(tblCelular.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

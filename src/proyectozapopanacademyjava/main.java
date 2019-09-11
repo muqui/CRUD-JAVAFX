@@ -19,13 +19,14 @@ public class main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-       // Parent root = FXMLLoader.load(getClass().getResource("/Resources/views/sceneListaCelulares.fxml"));
+       
        Parent root = FXMLLoader.load(getClass().getResource("/Resources/views/scenePrincipal.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
        // stage.setResizable(false);
+       stage.setMaximized(true);
         stage.show();
     }
 
