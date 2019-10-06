@@ -9,8 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 
 /**
@@ -25,6 +27,23 @@ public class ScenePrincipalController implements Initializable {
 
     @FXML
     private SceneListaCelularesController  sceneListaCelularesController; 
+    
+    @FXML
+    private MenuItem menuItenAltaProducto;
+    
+    @FXML
+    private MenuItem menuItemCaralogo;
+    
+    
+    @FXML
+    private void verPAntallaCatalogo(ActionEvent e){
+        tabPanePrincipal.getSelectionModel().select(0);
+    }
+    
+     @FXML
+    private void verPantallaAltaProducto(ActionEvent e){
+        tabPanePrincipal.getSelectionModel().select(1);
+    }
     /**
      * Initializes the controller class.
      */

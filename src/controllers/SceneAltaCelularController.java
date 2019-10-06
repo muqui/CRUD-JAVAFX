@@ -7,6 +7,7 @@ package controllers;
 
 import Beans.Celular;
 import DataAdapters.tblCelular;
+import java.io.File;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.JOptionPane;
 
 /**
@@ -71,6 +74,14 @@ public class SceneAltaCelularController implements Initializable {
 
     @FXML
     private Label labelErrorPrecio;
+    
+    
+    @FXML
+    private void seleccionarImagen(ActionEvent event){
+        System.out.println("SELLECCIONAR IMAGEN");
+        showSingleFileChooser();
+    }
+  
 
     @FXML
     private void altaCelular(ActionEvent event) {
@@ -165,18 +176,37 @@ public class SceneAltaCelularController implements Initializable {
             labelErrorCantidad.setText("Cantidad  es requerida.");
             resultado = false;
         } else {
-            celular.setCantidad(Integer.parseInt(textFieldCantidad.getText()));
+            try {
+                 celular.setCantidad(Integer.parseInt(textFieldCantidad.getText()));
+            } catch (Exception e) {
+                 labelErrorCantidad.setText("El numero mayor permitido es 2147483647.");
+                 resultado = false;
+            }
+           
         }
         // valida campo precio se ayuda con la clase FloatNumberTextField para permitir solo numeros flotantes
         if (textFieldPrecio.getText().trim().equals("")) {
             labelErrorPrecio.setText("Precio  es requerido.");
             resultado = false;
         } else {
-            //celular.setPrecio(new BigDecimal(textFieldPrecio.getText().toString()));
+        
             celular.setPrecio(Double.parseDouble(textFieldPrecio.getText()));
         }
 
         return resultado;
     }
-
+  private void showSingleFileChooser(){
+       ExtensionFilter imageFilter = new ExtensionFilter("Image files", "*.jpg");
+       
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(imageFilter);
+        File selectedFile = fileChooser.showOpenDialog(null);
+        
+        if(selectedFile != null){
+            System.out.println("" +  selectedFile.getName());
+            textFieldImagen.setText(selectedFile.toString());
+        }else{
+            System.out.println("seleccion cancelalada");
+        }
+    }
 }

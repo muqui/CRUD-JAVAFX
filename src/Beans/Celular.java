@@ -5,7 +5,6 @@
  */
 package Beans;
 
-import java.beans.PropertyChangeSupport;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -13,6 +12,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -30,10 +30,51 @@ public class Celular {
     private StringProperty  imagen=  new SimpleStringProperty();
     private IntegerProperty  cantidad=  new SimpleIntegerProperty();
     private DoubleProperty  precio=  new SimpleDoubleProperty();
+     private Button botonDetalles;
+    private Button botonActualizar;
+    private Button botonBorrar;
+    private ImageView image;
 
+    /**
+     * Contructor sin parametros
+     */
     public Celular() {
       
     }
+    
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param marca
+     * @param descripcion
+     * @param color
+     * @param imagen
+     * @param cantidad
+     * @param precio
+     * @param botonDetalles
+     * @param botonActualizar
+     * @param botonBorrar
+     * @param image
+     */
+    public Celular(int id, String nombre, String marca, String descripcion, String color, String imagen, int cantidad, double precio, Button botonDetalles, Button botonActualizar , Button botonBorrar, ImageView image) {
+        this.ID = new SimpleIntegerProperty(id);
+        this.nombre = new SimpleStringProperty(nombre);
+        this.marca =new SimpleStringProperty(marca);
+        this.descripcion = new SimpleStringProperty(descripcion);
+        this.color = new SimpleStringProperty(color);
+        this.imagen = new SimpleStringProperty(imagen);
+        this.cantidad =  new SimpleIntegerProperty(cantidad);
+        this.precio = new SimpleDoubleProperty(precio);
+        this.botonDetalles = botonDetalles;
+        this.botonActualizar = botonActualizar;
+        this.botonBorrar = botonBorrar;
+        this.botonDetalles = new Button("Detalles");
+        this.botonActualizar = new Button("Actualizar");
+        this.botonBorrar = new Button("Borrar");
+        this.image = image;
+    }
+
 
     public int getID() {
         return ID.get();
@@ -125,34 +166,21 @@ public class Celular {
         this.botonBorrar = botonBorrar;
     }
 
-    public PropertyChangeSupport getPropertySupport() {
-        return propertySupport;
+    
+    
+    
+    /**
+     * @return the image
+     */
+    public ImageView getImage() {
+        return image;
     }
 
-    public void setPropertySupport(PropertyChangeSupport propertySupport) {
-        this.propertySupport = propertySupport;
-    }
-    private Button botonDetalles;
-    private Button botonActualizar;
-    private Button botonBorrar;
-    private PropertyChangeSupport propertySupport;
-    
-    public Celular(int id, String nombre, String marca, String descripcion, String color, String imagen, int cantidad, double precio, Button botonDetalles, Button botonActualizar , Button botonBorrar) {
-        // this.nombre = new SimpleStringProperty(nombre);
-        this.ID = new SimpleIntegerProperty(id);
-        this.nombre = new SimpleStringProperty(nombre);
-        this.marca =new SimpleStringProperty(marca);
-        this.descripcion = new SimpleStringProperty(descripcion);
-        this.color = new SimpleStringProperty(color);
-        this.imagen = new SimpleStringProperty(imagen);
-        this.cantidad =  new SimpleIntegerProperty(cantidad);
-        this.precio = new SimpleDoubleProperty(precio);
-        this.botonDetalles = botonDetalles;
-        this.botonActualizar = botonActualizar;
-        this.botonBorrar = botonBorrar;
-        this.botonDetalles = new Button("Detalles");
-        this.botonActualizar = new Button("Actualizar");
-        this.botonBorrar = new Button("Borrar");
+    /**
+     * @param image the image to set
+     */
+    public void setImage(ImageView image) {
+        this.image = image;
     }
 
 

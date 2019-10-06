@@ -16,17 +16,8 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Edit">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
-                            </items>
-                        </Menu>
-                        <Menu mnemonicParsing="false" text="Help">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
+                                <MenuItem fx:id="menuItenAltaProducto" mnemonicParsing="false" onAction="#verPantallaAltaProducto" text="Alta producto" />
+                        <MenuItem fx:id="menuItemCaralogo" mnemonicParsing="false" onAction="#verPAntallaCatalogo" text="Catalogo" />
                             </items>
                         </Menu>
                     </menus>
@@ -35,17 +26,18 @@
             <center>
                 <TabPane fx:id="tabPanePrincipal" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                     <tabs>
-                        <Tab fx:id="tabAltaProducto" text="Alta producto">
-                            <content>
-                                <fx:include fx:id="altaCelular" source="sceneAltaCelular.fxml" />
-                            </content>
-                        </Tab>
                         <Tab fx:id="tabListaCelulares" text="Catalogo">
                             <content>
                       
                                 <fx:include fx:id="sceneListaCelulares" source="sceneListaCelulares.fxml" />
                             </content>
                         </Tab>
+                        <Tab fx:id="tabAltaProducto" text="Alta producto">
+                            <content>
+                                <fx:include fx:id="altaCelular" source="sceneAltaCelular.fxml" />
+                            </content>
+                        </Tab>
+                        
                         
                     </tabs>
                 </TabPane>
